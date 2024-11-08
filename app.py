@@ -59,7 +59,11 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
-    return "Welcome to the dashboard!"  # Placeholder for the dashboard page
+    return render_template('logged_home.html')  # Placeholder for the dashboard page
+
+@app.route('/logout')
+def logout():
+    return render_template('home.html')  # Placeholder for the dashboard page
 
 if __name__ == '_main_':  # Fixing the typo here
     app.run(debug=True)

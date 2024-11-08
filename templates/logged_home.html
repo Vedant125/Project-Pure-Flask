@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillForge</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/logged_home.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
     <div class="nav">
@@ -20,7 +22,8 @@
 
         <!-- Right user profile with dropdown for logout -->
         <div class="user-profile" onclick="toggleDropdown()">
-            <img src="{{ url_for('static', filename='user-icon.png') }}" alt="User Icon" class="user-icon">
+            <!-- <img src="{{ url_for('static', filename='user-icon.png') }}" alt="User Icon" class="user-icon"> -->
+            <i class="fa-solid fa-user"></i>
             <span class="user-name">User Name</span>
             <div id="profileDropdown" class="dropdown-content">
                 <a href="{{ url_for('logout') }}">Logout</a>
