@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import bcrypt
 from datetime import datetime
 
-app = Flask(_name_)
+app = Flask(__name__)
 app.secret_key = 'mysecret'  # Required for flashing messages and sessions
 
 # MongoDB connection
@@ -64,5 +64,5 @@ def logout():
     session.pop('username', None)  # Remove username from session
     return redirect(url_for('home'))
 
-if _name_ == '_main_':
+if __name__== '_main_':
     app.run(debug=True)
