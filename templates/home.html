@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillForge</title>
+    <link rel="stylesheet" href="Home.css">
+
+</head>
+
+<body>
+    <div class="nav">
+        <!-- Left logo -->
+        <div class="logo">SkillForge</div>
+
+        <!-- Center navigation links -->
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#content">Content</a></li>
+            <li><a href="#learn">Learn</a></li>
+
+        </ul>
+
+        <!-- Right authentication links -->
+        <div class="auth-links">
+            <a href="#login" class="button" onclick="showLoginPopup()">Login</a>
+            <a href="#register" class="button" onclick="showRegisterPopup()">Register</a>
+        </div>
+    </div>
+    <div class="main">
+        <div class="text">
+            <h1>
+                Empower Your Learning Journey with AI-Powered Precision: Tailored Courses, Adaptive Paths, and
+                Personalized Growth
+            </h1>
+        </div>
+        <div class="image">
+            <img alt="Smiling student holding books" height="500" src="homepg-img.png" width="400" />
+        </div>
+    </div>
+    <!-- Registration Popup Modal -->
+    <div id="registerPopup" class="popup">
+        <form action="/register" method="POST" class="popup-content">
+            <span onclick="hideRegisterPopup()" class="close">&times;</span>
+            <h2>Register</h2>
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="phone" placeholder="Phone" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+            <p>Already a user? <a href="#" onclick="switchToLogin()">Login</a></p> <!-- New Link Added -->
+        </form>
+    </div>
+    <!-- Login Popup Modal -->
+    <div id="loginPopup" class="popup">
+        <form id="loginForm" class="popup-content" onsubmit="handleLogin(event)">
+            <span onclick="hideLoginPopup()" class="close">&times;</span>
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <p id="loginError" style="color: red; display: none;">Invalid details</p>
+            <p>Don't have an account? <a href="#" onclick="switchToRegister()">Sign Up</a></p>
+        </form>
+    </div>
+    <script src="register.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>
