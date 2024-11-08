@@ -1,10 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+from pymongo import MongoClient
+import bcrypt
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'mysecret'  # Required for flashing messages
 
-# Dummy user data for demonstration (replace with database in production)
-users = {}
+# MongoDB connection
+client = MongoClient("mongodb://localhost:27017/")  # Update with your MongoDB connection string
+db = client["skillforge"]  # Use the 'skillforge' database
+users_collection = db["be_project"]  # Use the 'be_project' collection
 
 @app.route('/')
 def home():
@@ -17,23 +22,36 @@ def register():
     phone = request.form.get('phone')
     password = request.form.get('password')
 
-    # Basic validation and registration logic (replace with database logic)
-    if name in users:
+    # Check if user already exists in the database
+    if users_collection.find_one({"name": name}):
         flash('User already exists! Please log in.')
         return redirect(url_for('home'))
 
-    users[name] = {'phone': phone, 'password': password}
+    # Hash the password before storing it
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+    # Get current UTC timestamp
+    timestamp = datetime.utcnow()
+
+    # Insert the user into MongoDB with the timestamp
+    users_collection.insert_one({
+        "name": name,
+        "phone": phone,
+        "password": hashed_password,
+        "timestamp": timestamp  # Add the timestamp field
+    })
+    
     flash('Registration successful! Please log in.')
     return redirect(url_for('home'))
 
 @app.route('/login', methods=['POST'])
 def login():
-    username = request.form.get('username')
+    username = request.form.get('name')
     password = request.form.get('password')
 
-    # Authentication logic
-    user = users.get(username)
-    if user and user['password'] == password:
+    # Find the user in the database
+    user = users_collection.find_one({"name": username})
+    if user and bcrypt.checkpw(password.encode('utf-8'), user['password']):
         return redirect(url_for('dashboard'))  # Redirect to dashboard after successful login
     else:
         flash('Invalid login credentials')
@@ -43,5 +61,5 @@ def login():
 def dashboard():
     return "Welcome to the dashboard!"  # Placeholder for the dashboard page
 
-if __name__ == '__main__':
+if __name__ == '_main_':  # Fixing the typo here
     app.run(debug=True)

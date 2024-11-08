@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillForge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+    <div class="nav">
+        <!-- Left logo -->
+        <div class="logo">SkillForge</div>
+
+        <!-- Center navigation links -->
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#content">Content</a></li>
+            <li><a href="#learn">Learn</a></li>
+        </ul>
+
+        <!-- Right user profile with dropdown for logout -->
+        <div class="user-profile" onclick="toggleDropdown()">
+            <img src="{{ url_for('static', filename='user-icon.png') }}" alt="User Icon" class="user-icon">
+            <span class="user-name">User Name</span>
+            <div id="profileDropdown" class="dropdown-content">
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="text">
+            <h1>Empower Your Learning Journey with AI-Powered Precision: Tailored Courses, Adaptive Paths, and Personalized Growth</h1>
+        </div>
+        <div class="image">
+            <img alt="Smiling student holding books" height="500" src="{{ url_for('static', filename='homepg-img.png') }}" width="400" />
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
+</body>
+</html>
