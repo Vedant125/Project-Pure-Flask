@@ -1,62 +1,42 @@
 function showLoginPopup() {
     document.getElementById("loginPopup").style.display = "block";
+    document.getElementById("registerPopup").style.display = "none";
 }
 
 function hideLoginPopup() {
     document.getElementById("loginPopup").style.display = "none";
 }
 
-function switchToRegister() {
-    hideLoginPopup();
-    showRegisterPopup();
-}
-
 function handleLogin(event) {
-    event.preventDefault(); // Prevent form submission
-
+    event.preventDefault();
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    // Example of how to validate the login (replace with your actual verification logic)
-    const isValidUser = validateUser(username, password);
-
-    if (isValidUser) {
-        // Redirect to another HTML page (e.g., dashboard.html)
-        window.location.href = "dashboard.html"; // Change this to your desired page
+    if (username && password) {
+        // Perform login logic or validation
+        document.getElementById("loginError").style.display = "none";
+        hideLoginPopup(); // Hide popup on successful login
     } else {
-        // Show error message
         document.getElementById("loginError").style.display = "block";
     }
 }
 
-// Placeholder function for user validation
-function validateUser(username, password) {
-    // Replace this logic with your actual database verification
-    const mockUser = {
-        username: "testuser",
-        password: "password123"
-    };
-
-    return username === mockUser.username && password === mockUser.password;
-}
-
-// Hide popup on outside click
+// Close popup if clicked outside the popup content (added this logic here)
 window.onclick = function(event) {
-    const loginPopup = document.getElementById("loginPopup");
-    const registerPopup = document.getElementById("registerPopup");
-
-    // Check if the click is outside the login popup
-    if (event.target === loginPopup) {
+    // Close login popup if clicked outside the login popup
+    if (event.target == document.getElementById("loginPopup")) {
         hideLoginPopup();
-    }
-
-    // Check if the click is outside the register popup
-    if (event.target === registerPopup) {
-        hideRegisterPopup();
     }
 };
 
-function switchToLogin() {
-    hideRegisterPopup();  // Hide the registration popup
-    showLoginPopup();     // Show the login popup
-}
+window.onclick = function(event) {
+    // Close login popup if clicked outside the login popup
+    if (event.target == document.getElementById("loginPopup")) {
+        hideLoginPopup();
+    }
+    
+    // Close register popup if clicked outside the register popup
+    if (event.target == document.getElementById("registerPopup")) {
+        hideRegisterPopup();
+    }
+};

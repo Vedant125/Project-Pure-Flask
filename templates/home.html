@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillForge</title>
-    <link rel="stylesheet" href="Home.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
 
 </head>
 
@@ -36,12 +37,12 @@
             </h1>
         </div>
         <div class="image">
-            <img alt="Smiling student holding books" height="500" src="homepg-img.png" width="400" />
+            <img alt="Smiling student holding books" height="500" src="{{ url_for('static', filename='homepg-img.png') }}" width="400" />
         </div>
     </div>
     <!-- Registration Popup Modal -->
     <div id="registerPopup" class="popup">
-        <form action="/register" method="POST" class="popup-content">
+        <form action="{{ url_for('register') }}" method="POST" class="popup-content">
             <span onclick="hideRegisterPopup()" class="close">&times;</span>
             <h2>Register</h2>
             <input type="text" name="name" placeholder="Name" required>
@@ -63,8 +64,8 @@
             <p>Don't have an account? <a href="#" onclick="switchToRegister()">Sign Up</a></p>
         </form>
     </div>
-    <script src="register.js"></script>
-    <script src="login.js"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 </body>
 
 </html>
